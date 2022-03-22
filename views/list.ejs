@@ -3,17 +3,25 @@
   <head>
     <meta charset="UTF-8">
     <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="css/styles.css">
   </head>
+
   <body>
-    <h1><%= kindOfDay %></h1>
-    <ul>
+    <div class="box" id="heading">
+      <h1> <%= kindOfDay %> </h1>
+    </div>
+    <div class="box">
       <% for (i=0; i<newListItems.length; i++) { %>
-        <li><%= newListItems[i] %></li>
+        <div class="item">
+          <input type="checkbox">
+          <p> <%= newListItems[i] %> </p>
+        </div>
       <% }; %> 
-    </ul>
-    <form action = "/" method="post">
-      <input type="text" name="newItem" placeholder="New Item">
-      <button type="submit" name="submit">Add</button>
-    </form>
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="submit">+</button>
+      </form>
+    </div>
+
   </body>
 </html>
