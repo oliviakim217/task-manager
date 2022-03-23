@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="css/styles.css">
-  </head>
+<%- include("header") -%>
 
-  <body>
     <div class="box" id="heading">
       <h1> <%= listTitle %> </h1>
     </div>
@@ -23,6 +16,4 @@
         <button type="submit" name="list" value=<%= listTitle %>>+</button>
       </form>
     </div>
-
-  </body>
-</html>
+<%- include("footer") -%>
