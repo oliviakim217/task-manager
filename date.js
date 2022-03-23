@@ -1,3 +1,4 @@
+// Create a date module
 
 exports.getDate = function() {
     const today = new Date();
@@ -10,11 +11,5 @@ exports.getDate = function() {
     return today.toLocaleDateString("en-US", options);
 };
 
-exports.getDay = function() {
-    const today = new Date();
-    const options = {weekday: "long"};
-
-    return today.toLocaleDateString("en-US", options);
-};
 
 console.log(exports);
