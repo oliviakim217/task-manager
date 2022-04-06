@@ -31,21 +31,24 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
-Item.insertMany(defaultItems, function(err){
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("Successfully inserted default items.")
-    }
-});
 
 // Root Route
 app.get("/", function(req, res) {
-    res.render("list", { 
-        listTitle: "Today",
-        newListItems: items
+    Item.find({}, function(err, foundItems){
+        if (foundItems.length === 0) {
+            Item.insertMany(defaultItems, function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Successfully inserted default items.")
+                }
+            });
+            res.redirect("/");
+        } else {
+            res.render("list", { listTitle: "Today", newListItems: foundItems });
+        }
     });
-});
+ });
 
 app.post("/", function(req, res) {
     const item = req.body.newItem;
