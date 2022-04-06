@@ -11,6 +11,7 @@ app.use(express.static("public"));
 // Create DB - CHANGE LATER
 mongoose.connect("mongodb://localhost:27017/todolistDB");
 
+// Create a itemsSchema & items collection
 const itemsSchema = {
     name: String
 };
@@ -31,6 +32,14 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+// Create a listSchema & lists collection
+const listSchema = {
+    name: String,
+    items: [itemsSchema]
+};
+
+const List = mongoose.model("List", listSchema);
+
 
 // Root Route
 app.get("/", function(req, res) {
@@ -50,25 +59,66 @@ app.get("/", function(req, res) {
     });
  });
 
+ // Other Routes
+app.get("/:customListName", function(req, res) {
+    const customListName = req.params.customListName;
+
+    List.findOne({ name: customListName }, function(err, foundList){
+        if (!err) {
+            if (!foundList){
+                // Create a new list
+                const list = new List ({
+                    name: customListName,
+                    items: defaultItems 
+                });
+                list.save();
+                res.redirect("/" + customListName);
+            } else {
+                // Show an existing list
+                res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+            }
+        }   
+    });
+});
+
+// Add a new item
 app.post("/", function(req, res) {
-    const item = req.body.newItem;
-    console.log(req.body);
-    if (req.body.list === "Work") {
-        workItems.push(item);
-        res.redirect("/work");
-    } else {
-        items.push(item);
+    const itemName = req.body.newItem;
+    const listName = req.body.list; // 'work'
+
+    // Create a new document
+    const inputItem = new Item ({
+        name: itemName
+    });
+
+    if (listName === "Today") { // Add the new item to a default list
+        inputItem.save();
         res.redirect("/");
+    } else { // Add a new item to a custom list
+        List.findOne({name: listName}, function(err, foundList) {
+            if (!err) {
+                foundList.items.push(inputItem);
+                foundList.save();
+                res.redirect("/" + listName);
+            };
+        });
     }
 });
 
-// Work Route
-app.get("/work", function(req, res) {
-    res.render("list", {
-        listTitle: "Work List",
-        newListItems: workItems
+// Delete an item
+app.post("/delete", function(req, res){
+    const checkedItemId = req.body.checkbox;
+    Item.findByIdAndRemove(checkedItemId, function(err){
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Successfully removed the item.");
+            res.redirect("/");
+        }
     });
 });
+
+
 
 app.listen(3000, function () {
     console.log("Server started on port 3000.")
