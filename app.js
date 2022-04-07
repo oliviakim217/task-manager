@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require("dotenv").config();
 
 const app = express();
 
@@ -10,7 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Create DB - CHANGE LATER
-mongoose.connect("mongodb+srv://ok-admin:B3Pc9wgFrVkjJA2u@cluster0.myea8.mongodb.net/todolistDB");
+const MDB_PASSWORD = process.env.DB_PASSWORD;
+mongoose.connect("mongodb+srv://ok-admin:" + MDB_PASSWORD + "@cluster0.myea8.mongodb.net/todolistDB");
 
 // Create a itemsSchema & items collection
 const itemsSchema = {
