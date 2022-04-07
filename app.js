@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Create DB - CHANGE LATER
-mongoose.connect("mongodb://localhost:27017/todolistDB");
+mongoose.connect("mongodb+srv://ok-admin:B3Pc9wgFrVkjJA2u@cluster0.myea8.mongodb.net/todolistDB");
 
 // Create a itemsSchema & items collection
 const itemsSchema = {
@@ -56,11 +56,11 @@ app.get("/", function(req, res) {
             res.redirect("/");
         } else {
             res.render("list", { listTitle: "Today", newListItems: foundItems });
-        }
+        };
     });
  });
 
- // Other Routes (Users can create custom lists)
+// Other Routes (Users can create custom lists)
 app.get("/:customListName", function(req, res) {
     const customListName = _.capitalize(req.params.customListName);
 
@@ -77,8 +77,8 @@ app.get("/:customListName", function(req, res) {
             } else {
                 // Show an existing list
                 res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
-            }
-        }   
+            };
+        };   
     });
 });
 
@@ -92,7 +92,7 @@ app.post("/", function(req, res) {
         name: itemName
     });
 
-    if (listName === "Today") { // Add the new item to a default list
+    if (listName === "Today") { // Add the new item to the default list
         inputItem.save();
         res.redirect("/");
     } else { // Add a new item to a custom list
@@ -103,7 +103,7 @@ app.post("/", function(req, res) {
                 res.redirect("/" + listName);
             };
         });
-    }
+    };
 });
 
 // Delete an item
@@ -126,9 +126,7 @@ app.post("/delete", function(req, res){
                 res.redirect("/" + listName);
             }
         });
-    }
-
-    
+    }; 
 });
 
 
