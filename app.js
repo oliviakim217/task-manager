@@ -1,16 +1,19 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require("dotenv").config();
+
 
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// Create DB - CHANGE LATER
-mongoose.connect("mongodb+srv://ok-admin:B3Pc9wgFrVkjJA2u@cluster0.myea8.mongodb.net/todolistDB");
+// Create DB
+const DB_PW = process.env.MDB_TODOLISTDB_PW
+mongoose.connect("mongodb+srv://omkim:" + DB_PW + "@cluster0.rkb8p8z.mongodb.net/todolistDB");
+
 
 // Create a itemsSchema & items collection
 const itemsSchema = {
@@ -20,11 +23,11 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 const item1 = new Item({
-    name: "Welcome To My To-do List!"
+    name: "Welcome to your To-do List!"
 });
 
 const item2 = new Item({
-    name: "Hit the + button to add a new item."
+    name: 'Add "/List Name" at the end of the URL to create a new list.'
 });
 
 const item3 = new Item({
