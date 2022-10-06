@@ -13,7 +13,7 @@ https://to-do-list-364701.uc.r.appspot.com/
 Node.js, Express, EJS, MongoDB, HTML, CSS, Git
 ## Demo
 
-![Screenshot](https://github.com/oliviakim217/to-do-list/blob/develop/to-do-list-image.png?raw=true)
+![Screenshot](https://github.com/oliviakim217/to-do-list/blob/develop/images/to-do-list-image.png?raw=true)
 
 
 ## Features
