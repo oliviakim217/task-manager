@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 require("dotenv").config();
@@ -7,12 +6,14 @@ require("dotenv").config();
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// Create DB - CHANGE LATER
-const MDB_PASSWORD = process.env.DB_PASSWORD;
-mongoose.connect("mongodb+srv://ok-admin:" + MDB_PASSWORD + "@cluster0.myea8.mongodb.net/todolistDB");
+
+// Create DB
+const DB_PW = process.env.MDB_TODOLISTDB_PW
+mongoose.connect("mongodb+srv://omkim:" + DB_PW + "@cluster0.rkb8p8z.mongodb.net/todolistDB");
+
 
 // Create a itemsSchema & items collection
 const itemsSchema = {
@@ -22,11 +23,11 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 const item1 = new Item({
-    name: "Welcome To My To-do List!"
+    name: "Welcome to your To-do List!"
 });
 
 const item2 = new Item({
-    name: "Hit the + button to add a new item."
+    name: 'Add "/List Name" at the end of the URL to create a new list.'
 });
 
 const item3 = new Item({
@@ -132,11 +133,6 @@ app.post("/delete", function(req, res){
 });
 
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3000;
-}
-
-app.listen(port, function () {
-    console.log("Server has started.")
-})
+var listener = app.listen(process.env.PORT, function () {
+    console.log("The app is listening on port " + listener.address().port);
+});
