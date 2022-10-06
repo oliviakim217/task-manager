@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 require("dotenv").config();
 
-
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 
 // Create DB
 const DB_PW = process.env.MDB_TODOLISTDB_PW
