@@ -7,7 +7,7 @@ on Google Cloud Platform and the database is deployed on MongoDB Atlas.
 
 ## Link
 
-https://to-do-list-364701.uc.r.appspot.com/
+https://to-do-list-364718.uc.r.appspot.com
 ## Tech Stack
 
 Node.js, Express, EJS, MongoDB, HTML, CSS, Git, GCP
