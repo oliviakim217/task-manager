@@ -1,8 +1,8 @@
 
-# To-Do List
+# Task Manager
 
-A to-do list to organize your tasks. This app is deployed on App Engine 
-on Google Cloud Platform and the database is deployed on MongoDB Atlas. 
+A to-do list manager to organize your tasks. It allows users to create, customize, and delete lists for more effective time management. 
+This app is deployed on App Engine on Google Cloud Platform and the database is deployed on MongoDB Atlas. 
 
 
 ## Link
