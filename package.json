@@ -1,14 +1,14 @@
 {
-  "name": "to-do-list",
+  "name": "Task Manager",
   "version": "1.0.0",
-  "description": "A simple to-do list",
+  "description": "A task manager for effective time management",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oliviakim217/to-do-list.git"
+    "url": "git+https://github.com/oliviakim217/task-manager.git"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +16,9 @@
     "node": "14.17.1"
   },
   "bugs": {
-    "url": "https://github.com/oliviakim217/to-do-list/issues"
+    "url": "https://github.com/oliviakim217/task-manager/issues"
   },
-  "homepage": "https://github.com/oliviakim217/to-do-list#readme",
+  "homepage": "https://github.com/oliviakim217/task-manager#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
     "dotenv": "^16.0.3",
